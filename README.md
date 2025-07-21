@@ -12,7 +12,7 @@ This repository showcases a variety of small to medium-sized Python projects tha
 | 🎮 **Pygame Animations** | Bouncing balls, sprite movement, custom animation loops     |
 | 🧱 **OOP Practice**       | Class-based design, inheritance, encapsulation, real-world modeling |
 | 📐 **Algorithms**         | Sorting algorithms, pathfinding, recursion-based solutions  |
-
+|**Some Implementaions**    | Like Stack, Queue and other datastrutures
 Each folder includes its own `README.md` (where needed) with details on how the specific project works.
 
 ---
