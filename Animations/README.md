@@ -13,7 +13,6 @@ This repository features creative and fun animations made with Python, along wit
 | `music_wave.py`    | Animated sine wave synced to music.                  |
 | `sprite_dance.py`  | Dancing character using sprite animation.            |
 
-*(Add or edit project descriptions as needed)*
 
 ---
 
