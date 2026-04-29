@@ -1,0 +1,15 @@
+I built a machine learning model using Python and scikit-learn.
+FastAPI is used to create backend APIs.
+I enjoy working on neural networks and deep learning projects.
+Docker is useful for deployment of applications.
+I created a calculator app using Python and FastAPI.
+I can fly 
+I can sing 
+I can cry 
+I can drink
+I can read 
+I can write 
+I am the king 
+I am the dragon and the god 
+I am the merciful I am the cursed and I am the blessed 
+I am the vegence I am the Batman 
