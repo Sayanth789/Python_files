@@ -1,5 +1,7 @@
 # # tictactoe_oop.py, an object-oriented tic-tac-toe game.
 
+import copy 
+
 ALL_SPACES = list('123456789')  # The keys for a TTT board 
 X, O , BLANK = "X", "O", " "
 
@@ -8,7 +10,18 @@ def main():
     Runs a game of tic-tac-toe.
     """
     print("Welcome to tic-tac-toe")
-    gameBoard = TTTBoard()   # Creating a TTT board object 
+
+    if input('Use mini board? Y/N: ').lower().startswith('y'):
+        gameBoard = MiniBoard()   # create A Miniboard object
+
+    else:
+        gameBoard = TTTBoard()  # Create a TTTBoard Object 
+            
+
+
+    # gameBoard = TTTBoard()   # Creating a TTT board object 
+    gameBoard = HybridBoard() 
+
     currentPlayer, nextPlayer = X, O 
 
     while True:
@@ -22,6 +35,8 @@ def main():
 
         gameBoard.updateBoard(move, currentPlayer)  # Make the move 
 
+       
+
         # Check if the game is oveer     
         if gameBoard.isWinner(currentPlayer):  # First Check for victory
             print(gameBoard.getBoardStr())
@@ -34,7 +49,7 @@ def main():
         currentPlayer, nextPlayer = nextPlayer, currentPlayer # Swap turns 
 
     print('Thanks for playing!')
-
+   
 class TTTBoard:
     def __init__(self, usePrettyBoard=False, useLogging=False):
         """Create a new, blank tic tac toe board."""
@@ -84,6 +99,63 @@ class TTTBoard:
     def updateBoard(self, space, player):
         """ Sets the space on the board to player """        
         self._spaces[space] = player 
+
+
+class MiniBoard(TTTBoard):
+    def getBoardStr(self):
+        """ Return a tiny text-representation of the board """
+        # Change blank spaces to d 
+        for space in ALL_SPACES:
+            if self._spaces[space] == BLANK:
+                self._spaces[space] = "."
+
+        boardStr = f'''  
+            {self._spaces['1']}{self._spaces['2']}{self._spaces['3']} 123 
+            {self._spaces['4']}{self._spaces['5']}{self._spaces['6']} 456 
+            {self._spaces['7']}{self._spaces['8']}{self._spaces['9']} 789 
+        
+                '''
+        # Change '.' back to blank spaces 
+        for space in ALL_SPACES:
+            if self._spaces[space] == '.':
+                self._spaces[space] = BLANK
+        return boardStr
+
+class HintBoard(TTTBoard):
+    def getBoardStr(self):
+        """ Return a text-representation of the board with hints """
+        boardStr =  super().getBoardStr()   # Call getBoardStr() in the TTTBoard 
+
+        xCanWin = False 
+        oCanWin = False 
+        originalSpaces = self._spaces   # Backup _spaces 
+        for space in ALL_SPACES:    # Check each space 
+            # Simulate X moving on this space:
+            self._spaces = copy.copy(originalSpaces)
+            if self._spaces[space] == BLANK:
+                self._spaces[space] = X 
+            if self.isWinner(X):
+                xCanWin = True 
+            
+            # Simulate 0 moving on this page
+            self._spaces = copy.copy(originalSpaces)
+            if self._spaces[space] == BLANK:
+                self._spaces[space] = O
+            if self.isWinner(O):
+                oCanWin = True 
+        
+        if xCanWin:
+            boardStr += '\nX can win in one more move.'
+        if oCanWin:
+            boardStr += '\nO can win in one more move'
+        self._spaces = originalSpaces
+        return boardStr    
+
+
+
+
+class HybridBoard(HintBoard, MiniBoard):
+    pass 
 
 
 if __name__ == "__main__":
