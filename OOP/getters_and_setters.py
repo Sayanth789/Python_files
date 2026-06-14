@@ -22,7 +22,7 @@ class Item:
 
     @name.setter 
     def name(self, value):
-        if len(vaule) > 10:
+        if len(value) > 10:
             raise Exception("The name is too long!")
         else:
             self.__name = value 
@@ -38,12 +38,13 @@ class Item:
         with open('items.csv', 'r') as f:
             reader = csv.DictReader(f)
             items = list(reader)
-
+        
         for item in items:
             Item(
-              name=item.get('name'),
-              price=float(item.get('price()'),
-             qunatity=int(item.get('qunatity'))
+                name=item.get('name'),
+                price=float(item.get('price')),
+                quantity=int(item.get('qunatity'))
+            )   
 
 
     @staticmethod 
